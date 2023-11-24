@@ -6,6 +6,7 @@
 Подключаемся с помощью vagrant ssh.
 Ниже процесс уменьшения размера тома, команды и результаты:
 
+```shell
 vkan@l04-ubuntu:~/Documents/DZ/lvm/stands-03-lvm-master$ vagrant ssh
 [vagrant@lvm ~]$ lsblk
 NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -303,11 +304,12 @@ Skipping udev rule: 91-permissions.rules
 *** Creating image file ***
 *** Creating image file done ***
 *** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+```
 
 ********************************************************************************
 2. _Выделить том под /var (/var - сделать в mirror)_
 ********************************************************************************
-
+```shell
 [root@lvm boot]# pvcreate /dev/sdc /dev/sdd
   Physical volume "/dev/sdc" successfully created.
   Physical volume "/dev/sdd" successfully created.
@@ -373,11 +375,11 @@ sdd                        8:48   0    1G  0 disk
 └─vg_var-lv_var_rimage_1 253:6    0  952M  0 lvm  
   └─vg_var-lv_var        253:7    0  952M  0 lvm  /var
 sde                        8:64   0    1G  0 disk
-
+```
 ********************************************************************************
 3. _Выделить том под /home; для /home - сделать том для снэпшотов; работа со снапшотами._
 ********************************************************************************
-
+```shell
 [root@lvm ~]# lvremove /dev/vg_root/lv_root
 Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
   Logical volume "lv_root" successfully removed
@@ -402,7 +404,9 @@ realtime =none                   extsz=4096   blocks=0, rtextents=0
 [root@lvm ~]# rm -rf /home/*
 [root@lvm ~]# umount /mnt
 [root@lvm ~]# mount /dev/VolGroup00/LogVol_Home /home
-# Прописываем в fstab для автоматического монтирования /home
+```
+# _Прописываем в fstab для автоматического монтирования /home_
+```shell
 [root@lvm ~]# echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
 [root@lvm ~]# cd /home
 [root@lvm home]# ls
@@ -436,3 +440,4 @@ umount: /home: target is busy.
 file1   file12  file15  file18  file20  file5  file8
 file10  file13  file16  file19  file3   file6  file9
 file11  file14  file17  file2   file4   file7  vagrant
+```
