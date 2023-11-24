@@ -405,7 +405,7 @@ realtime =none                   extsz=4096   blocks=0, rtextents=0
 [root@lvm ~]# umount /mnt
 [root@lvm ~]# mount /dev/VolGroup00/LogVol_Home /home
 ```
-# _Прописываем в fstab для автоматического монтирования /home_
+_#Прописываем в fstab для автоматического монтирования /home_
 ```shell
 [root@lvm ~]# echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
 [root@lvm ~]# cd /home
