@@ -1,0 +1,18 @@
+# -*- mode: ruby -*- 
+# vi: set ft=ruby :
+Vagrant.configure(2) do |config| 
+  config.vm.box = "samo82/centos8-kernel6" 
+  config.vm.box_version = "1.0" 
+  config.vm.provider "virtualbox" do |v| 
+     v.memory = 2048 
+     v.cpus = 2 
+  end 
+ 
+  config.vm.define "packages" do |packages| 
+     packages.vm.network "private_network", ip: "192.168.56.101",  virtualbox__intnet: "internal" 
+     packages.vm.network "forwarded_port", guest: 80, host: 8080
+     packages.vm.hostname = "packages"
+     packages.vm.synced_folder ".", "/vagrant", disabled:true
+     packages.vm.provision "shell", path: "repo_builder_script.sh"
+  end 
+end 
