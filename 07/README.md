@@ -45,7 +45,7 @@ vagrant destroy -f && vagrant up
 
 ![img](https://github.com/vkan82/homework/blob/main/07/img/005.png)
 
-![img](https://github.com/vkan82/homework/blob/main/07/img/6.png)
+![img](https://github.com/vkan82/homework/blob/main/07/img/006.png)
 
 2. Третий способ rw init=/sysroot/bin/sh:
 * также при загрузке GRUB меню жмем `e` для перехода к редактированию параметров загрузки
@@ -54,9 +54,9 @@ vagrant destroy -f && vagrant up
 * Наша корневая файловая система смонтирована сразу в режиме Read-Write.
 * В прошлых примерах тоже можно заменить `ro` на `rw`.
 
-![img](https://github.com/vkan82/homework/blob/main/07/img/7.png)
+![img](https://github.com/vkan82/homework/blob/main/07/img/007.png)
 
-![img](https://github.com/vkan82/homework/blob/main/07/img/8.png)
+![img](https://github.com/vkan82/homework/blob/main/07/img/008.png)
 
 * в общем все три способа похожи, по сути все три способа не дают загрузиться init процессу,
 * при этом загружаются минимальные сервисы и файловая система, 1 и 3 способы
@@ -126,4 +126,4 @@ Last login: Mon Dec  4 05:20:41 2023 from 10.0.2.2
   test
 ```
 
-![img](https://github.com/vkan82/homework/blob/main/07/img/9.png)
+![img](https://github.com/vkan82/homework/blob/main/07/img/009.png)
