@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "generic/centos7"
+  # vagrant-gatling-rsync is starting the sync engine
+  # because you have at least one rsync folder.
+  # To disable this behavior, set `config.gatling.rsync_on_startup = false` in your Vagrantfile.
+  config.vm.synced_folder ".", "/", disabled:true
+
+  config.vm.provider "loading" do |v|
+    v.memory = 256
+    v.cpus = 2
+  end
+
+  config.vm.hostname = "loading"
+
+end
