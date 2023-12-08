@@ -41,7 +41,6 @@ Type=oneshot
 EnvironmentFile=/etc/sysconfig/watchlog
 ExecStart=/opt/watchlog.sh \$WORD \$LOG
 EOF
-chmod 664 /etc/systemd/system/watchlog.service
 
 # Создаем юнит для таймера
 cat <<EOF> /etc/systemd/system/watchlog.timer
@@ -49,13 +48,13 @@ cat <<EOF> /etc/systemd/system/watchlog.timer
 Description=Run watchlog script every 30 second
 [Timer]
 # Run every 30 second
-AccuracyUSec=1us  # эта настройка задает точность в микросекундах, иначе отчет времени будет не точный
+AccuracySec=1us
+# эта настройка задает точность в микросекундах, иначе отчет времени будет не точный
 OnUnitActiveSec=30
 Unit=watchlog.service
 [Install]
 WantedBy=multi-user.target
 EOF
-chmod 664 /etc/systemd/system/watchlog.timer
 systemctl stop NetworkManager
 
 # запускаем сервис и таймер
