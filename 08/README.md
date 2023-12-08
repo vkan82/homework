@@ -370,6 +370,8 @@ systemctl daemon-reload
 
 ```shell
 sudo -i
+systemctl daemon-reload
+systemctl start watchlog.service
 systemctl start watchlog.timer
 tail -f /var/log/messages
 ```

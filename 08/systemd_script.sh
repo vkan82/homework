@@ -113,7 +113,7 @@ sed -i '/Listen 80/i\PidFile /var/run/httpd-first.pid' /etc/httpd/conf/first.con
 yes | cp -f --preserv /etc/httpd/conf/httpd.conf /etc/httpd/conf/second.conf
 sed -i '/Listen 80/i\PidFile /var/run/httpd-second.pid' /etc/httpd/conf/second.conf
 sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/second.conf
-systemctl daemon-reload
+
 # запустим и проверим
 #systemctl start httpd@first
 #systemctl start httpd@second
