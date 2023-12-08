@@ -235,18 +235,7 @@ EOF
 echo "ALERT" > /var/log/watchlog.log
 
 # создаем скрипт
-cat <<EOF> /opt/watchlog.sh
-#!/bin/bash
-WORD=\$1
-LOG=\$2
-DATE=`date`
-if grep \$WORD \$LOG &> /dev/null
-then
-logger "\$DATE: I found word, Master!"
-else
-exit 0
-fi
-EOF
+wget https://raw.githubusercontent.com/vkan82/homework/main/08/watchlog.sh -O /opt/watchlog.sh
 chmod +x /opt/watchlog.sh
 
 # Создаем юнит для сервиса

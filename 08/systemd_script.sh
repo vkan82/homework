@@ -1,10 +1,7 @@
 #!/bin/bash
 sudo -i
 
-#***************************************************************
 # 1. wathlog
-#***************************************************************
-
 # создаём файл с конфигурацией для сервиса в /etc/sysconfig
 cat <<EOF> /etc/sysconfig/watchlog
 # Configuration file for my watchlog service
@@ -18,18 +15,7 @@ EOF
 echo "ALERT" > /var/log/watchlog.log
 
 # создаем скрипт
-cat <<EOF> /opt/watchlog.sh
-#!/bin/bash
-WORD=\$1
-LOG=\$2
-DATE=`date`
-if grep \$WORD \$LOG &> /dev/null
-then
-   logger "\$DATE: I found word, Master!"
-else
-   exit 0
-fi
-EOF
+wget https://raw.githubusercontent.com/vkan82/homework/main/08/watchlog.sh -O /opt/watchlog.sh
 chmod +x /opt/watchlog.sh
 
 # Создаем юнит для сервиса
@@ -65,10 +51,7 @@ systemctl stop NetworkManager
 # после 2 минуты выводим 30 последних строк лога 
 #tail -30 /var/log/messages
 
-#*******************************************************************************
 # 2. установить spawn-fcgi и переписать init-скрипт на unit-файл
-#*******************************************************************************
-
 # Устанавливаем spawn-fcgi и необходимые для него пакеты
 yum install -y epel-release
 yum install -y spawn-fcgi
@@ -109,11 +92,7 @@ EOF
 #systemctl start spawn-fcgi
 #systemctl status spawn-fcgi
 
-#*******************************************************************************
-# 3. Дополнить юнит-файл apache httpd возможностью запустить несколько
-# инстансов сервера с разными конфигами
-#*******************************************************************************
-
+# 3. Дополнить юнит-файл apache httpd возможностью запустить несколько инстансов сервера с разными конфигами
 # Для запуска нескольких экземпляров сервиса будем использовать шаблон в
 # конфигурации файла окружения /usr/lib/systemd/system/httpd.service
 sed -i '/ExecStart/i\EnvironmentFile=/etc/sysconfig/httpd-%I' /usr/lib/systemd/system/httpd.service
