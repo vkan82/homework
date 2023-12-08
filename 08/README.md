@@ -370,7 +370,6 @@ systemctl daemon-reload
 
 ```shell
 sudo -i
-systemctl start watchlog.service
 systemctl start watchlog.timer
 tail -f /var/log/messages
 ```
@@ -378,15 +377,19 @@ tail -f /var/log/messages
 ## результат:
 
 ```shell
-Dec  6 05:18:08 nginx systemd[1]: Starting My watchlog service...
-Dec  6 05:18:08 nginx root[2328]: Wed Dec  6 05:18:08 EST 2023: I found word, Master!
-Dec  6 05:18:08 nginx systemd[1]: watchlog.service: Succeeded.
-Dec  6 05:18:08 nginx systemd[1]: Started My watchlog service.
-...
-Dec  6 05:18:58 nginx systemd[1]: Starting My watchlog service...
-Dec  6 05:18:58 nginx root[2354]: Wed Dec  6 05:18:58 EST 2023: I found word, Master!
-Dec  6 05:18:58 nginx systemd[1]: watchlog.service: Succeeded.
-Dec  6 05:18:58 nginx systemd[1]: Started My watchlog service.
+Dec  8 10:28:20 otus-c8 root[37037]: Fri Dec  8 10:28:20 EST 2023: I found word, Master!
+Dec  8 10:28:20 otus-c8 systemd[1]: watchlog.service: Succeeded.
+Dec  8 10:28:20 otus-c8 systemd[1]: Started My watchlog service.
+Dec  8 10:28:50 otus-c8 systemd[1]: Starting My watchlog service...
+Dec  8 10:28:50 otus-c8 root[37044]: Fri Dec  8 10:28:50 EST 2023: I found word, Master!
+Dec  8 10:28:50 otus-c8 systemd[1]: watchlog.service: Succeeded.
+Dec  8 10:28:50 otus-c8 systemd[1]: Started My watchlog service.
+Dec  8 10:29:19 otus-c8 smartd[777]: System clock time adjusted to the past. Resetting next wakeup time.
+Dec  8 10:29:20 otus-c8 systemd[1]: Starting My watchlog service...
+Dec  8 10:29:20 otus-c8 root[37057]: Fri Dec  8 10:29:20 EST 2023: I found word, Master!
+Dec  8 10:29:20 otus-c8 systemd[1]: watchlog.service: Succeeded.
+Dec  8 10:29:20 otus-c8 systemd[1]: Started My watchlog service.
+^C
 ```
 
 ## проверка 2 части
@@ -401,28 +404,28 @@ systemctl status spawn-fcgi
 
 ```shell
 ● spawn-fcgi.service - Spawn-fcgi startup service by Otus
-   Loaded: loaded (/etc/systemd/system/spawn-fcgi.service; disabled; vendor preset: disabled)
-   Active: active (running) since Wed 2023-12-06 06:11:42 EST; 8s ago
- Main PID: 36170 (php-cgi)
+   Loaded: loaded (/etc/systemd/system/spawn-fcgi.service; disabled; vendor pre>
+   Active: active (running) since Fri 2023-12-08 10:30:00 EST; 1s ago
+ Main PID: 37069 (php-cgi)
     Tasks: 33 (limit: 12221)
-   Memory: 18.9M
+   Memory: 19.0M
    CGroup: /system.slice/spawn-fcgi.service
-           ├─36170 /usr/bin/php-cgi
-           ├─36173 /usr/bin/php-cgi
-           ├─36174 /usr/bin/php-cgi
-           ├─36175 /usr/bin/php-cgi
-           ├─36176 /usr/bin/php-cgi
-           ├─36177 /usr/bin/php-cgi
-           ├─36178 /usr/bin/php-cgi
-           ├─36179 /usr/bin/php-cgi
-           ├─36180 /usr/bin/php-cgi
-           ├─36181 /usr/bin/php-cgi
-           ├─36182 /usr/bin/php-cgi
-           ├─36183 /usr/bin/php-cgi
-           ├─36184 /usr/bin/php-cgi
-           ├─36185 /usr/bin/php-cgi
-           ├─36186 /usr/bin/php-cgi
-           ├─36187 /usr/bin/php-cgi
+           ├─37069 /usr/bin/php-cgi
+           ├─37071 /usr/bin/php-cgi
+           ├─37072 /usr/bin/php-cgi
+           ├─37073 /usr/bin/php-cgi
+           ├─37074 /usr/bin/php-cgi
+           ├─37075 /usr/bin/php-cgi
+           ├─37076 /usr/bin/php-cgi
+           ├─37077 /usr/bin/php-cgi
+           ├─37078 /usr/bin/php-cgi
+           ├─37079 /usr/bin/php-cgi
+           ├─37080 /usr/bin/php-cgi
+           ├─37081 /usr/bin/php-cgi
+           ├─37082 /usr/bin/php-cgi
+           ├─37083 /usr/bin/php-cgi
+           ├─37084 /usr/bin/php-cgi
+           ├─37085 /usr/bin/php-cgi
 ```
 
 ## проверка 3 части
@@ -437,6 +440,6 @@ ss -tnulp | grep httpd
 ## результат:
 
 ```shell
-tcp   LISTEN 0      511           0.0.0.0:8080       0.0.0.0:*    users:(("httpd",pid=37625,fd=3),("httpd",pid=37624,fd=3),("httpd",pid=37623,fd=3),("httpd",pid=37619,fd=3))
-tcp   LISTEN 0      511           0.0.0.0:80         0.0.0.0:*    users:(("httpd",pid=37875,fd=3),("httpd",pid=37874,fd=3),("httpd",pid=37873,fd=3),("httpd",pid=37866,fd=3))
+tcp   LISTEN 0      511           0.0.0.0:8080       0.0.0.0:*    users:(("httpd",pid=37125,fd=3),("httpd",pid=37124,fd=3),("httpd",pid=37123,fd=3),("httpd",pid=37122,fd=3),("httpd",pid=37119,fd=3))
+tcp   LISTEN 0      511           0.0.0.0:80         0.0.0.0:*    users:(("httpd",pid=37348,fd=3),("httpd",pid=37347,fd=3),("httpd",pid=37346,fd=3),("httpd",pid=37345,fd=3),("httpd",pid=37343,fd=3))
 ```
