@@ -9,7 +9,7 @@
 #         echo $to_hour
 hour1() {
  
-    corrective=680
-    formatted_hour=$(LANG=en_EN date -d "$corrective hour ago" +%d/%b/%Y:%H:%m:%S)
+    corrective=589
+    formatted_hour=$(LANG=en_EN date -d "$corrective hour ago" +%d/%b/%Y:%H)
     echo $formatted_hour
 }

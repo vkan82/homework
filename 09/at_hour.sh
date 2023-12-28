@@ -15,7 +15,7 @@ hour() {
     # Так как мы используем тестовый лог файл, то в нем нет сведений на актуальное время,
     # имитируем выборку в прошлом, для этого вычтем необходимое количество часов 681
     
-    corrective=681
+    corrective=590
     formatted_hour=$(LANG=en_EN date -d "$corrective hour ago" +%d/%b/%Y:%H)
     echo $formatted_hour
 }
